@@ -17,5 +17,5 @@ int main(int argc, char *argv[])
 	argc=argc;
 	argv=argv;
 
-	set1_challenge3();
+	set1_challenge5();
 }

@@ -1,4 +1,5 @@
 #include <iomanip>
+#include <fstream>
 #include <string>
 #include <sstream>
 #include "data-utils.h"
@@ -70,4 +71,27 @@ std::string bin_to_base64(std::vector<uint8_t> data)
 
 std::string bin_to_string(std::vector<uint8_t> bin) {
     return std::string(bin.begin(), bin.end());
+}
+
+std::vector<std::vector<uint8_t>> read_hex_file(std::string filepath) {
+
+    std::vector<std::vector<uint8_t>> out;
+    std::ifstream infile(filepath);
+    std::string line;
+
+    if (!infile.good()) {
+        printf("Failed to open %s\n", filepath.c_str());
+        return out;
+    }
+
+    while (std::getline(infile, line)) {
+        auto bin = hex_to_bin(line);
+        out.push_back(bin);
+    }
+
+    return out;
+}
+
+std::vector<uint8_t> string_to_bin(std::string str) {
+    return std::vector<uint8_t>(str.begin(), str.end());
 }
